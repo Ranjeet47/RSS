@@ -1,0 +1,43 @@
+if (srs == null){
+            return srs;
+        }
+        if(srs.data < ide.data ){
+
+            srs.right = AVLdelete(srs.right , ide);
+        }
+        else {
+
+            if(srs.data > ide.data){
+
+                srs.left = AVLdelete(srs.left , ide);
+            }
+            else {
+                if(srs.left == null || srs.right == null){
+
+                    if(srs.left == null){
+
+                        if(srs.right == null){
+
+                            srs = null;
+                        }else {
+                            srs = srs.right;
+                        }
+                    }
+                    else {
+                        srs = srs.left;
+                    }
+                }
+                else {
+
+                    Node node1 = srs.right;
+                    while(node1.left != null){
+                        node1 = node1.left;
+                    }
+
+                    srs.data = node1.data;
+
+                    srs.right = AVLdelete(srs.right ,node1);
+
+                }
+            }
+        }

@@ -1,0 +1,31 @@
+8
+there is already a owner in the given company
+internal member can not be deleted 
+both given id members are not at the same level
+8,9,4 19 20
+8,9,4 19 20,11
+8,9,4 19 20,11 119,18
+8,9 200,4 19 20 40,11 119,18
+there is no such member to be deleted 
+9
+internal member can not be deleted 
+8,70,4 19 40 90,11 119 190,21,17
+8,70,4 19 40 90,11 119 190,21 67 700 900,17 60 170 180 210
+gh
+119
+8,70,19 40 90,11 119 190,67 700 900,17 60 170 180 210
+8,70,19 40 66 90,11 50 78 119 190,65 67 89 700 900,17 60 170 180 210
+ownwer does not have any boss
+-1
+119
+8,70,19 66 90,11 50 78 119 190,65 67 89 900,17 60 170 180 210
+8,70,19 66 90,11 19 50 78 115 119 190 875,65 67 89 900,17 20 60 170 180 210 618
+90
+8,70,19 66 90,11 19 50 115 119 190 875,65 67 89,17 20 170 180 210 618
+there is no such boss present in the company
+there is no such boss present in the company
+there is no such boss present in the company
+8,70,19 66 90,11 19 50 115 119 190 875,65 67 89,6 17 20 170 180 210 618 1911
+89
+89
+90

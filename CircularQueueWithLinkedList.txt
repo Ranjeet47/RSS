@@ -1,0 +1,80 @@
+package com.company;
+
+
+class Node{
+    int data;
+    Node next;
+
+    // this below is constructor for above class
+    public Node(int num){
+        this.data = num;
+        this.next = null;
+    }
+}
+
+class CirQueueInL{
+    public Node front=null;
+    Node rear=null;
+
+    void enque(int num){
+        Node node = new Node(num);
+        if (rear==null && front==null){
+            front = node;
+            rear = node;
+        }else{
+            rear.next = node;
+            rear = rear.next;
+            rear.next = front;
+        }
+    }
+
+    void deque(){
+        if (rear == null && front == null){
+            System.out.println("Nothing to be deleted ! , queue is empty");
+        }else{
+            front=front.next;
+            rear.next = front;
+        }
+    }
+
+    void showque(){
+
+        if (rear==null && front==null){
+            System.out.println("nothing to be shown ! , queue is empty");
+        }else{
+            Node inifront = front ;
+            System.out.println("It's our queue:");
+            while(front.next != inifront){
+                System.out.println(front.data);
+                front = front.next;
+            }
+            System.out.println(front.data);
+            front = inifront ;
+        }
+    }
+
+    void showfr(){
+        if (rear==null){
+            System.out.println("front and both not exist ! sorry ! , queue is empty ");
+        }else{
+            System.out.println("It's front rear elements:");
+            System.out.println(front.data);
+            System.out.println(rear.data);
+        }
+    }
+}
+
+public class Main{
+    public static void main(String[] args ){
+        CirQueueInL que = new CirQueueInL();
+        que.enque(5);
+        que.enque(6);
+        que.enque(8);
+        que.enque(9);
+        que.showque();
+        que.deque();
+        que.showque();
+        que.showfr();
+    }
+}
+

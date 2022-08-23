@@ -1,0 +1,22 @@
+mn.hireEmployee(115,66);
+        System.out.println(mn.toString(8));
+
+        mn.hireEmployee(19,90);
+        mn.hireEmployee(618,65);
+        System.out.println(mn.toString(8));
+
+        mn.hireEmployee(20,89);
+        mn.hireEmployee(875,90);
+
+        System.out.println(mn.toString(8));
+        mn.fireEmployee(60);
+        mn.fireEmployee(900);
+        mn.fireEmployee(78,119);
+        System.out.println(mn.lowestCommonBoss(20,875));
+
+        mn.hireEmployee(709,90);
+        mn.hireEmployee(901,901);
+        mn.hireEmployee(191,89);
+        mn.hireEmployee(26,709);
+        mn.hireEmployee(187,26);
+        System.out.println(mn.toString(60));

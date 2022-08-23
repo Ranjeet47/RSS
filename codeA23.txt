@@ -1,0 +1,89 @@
+Vector<Node> vctr2 = new Vector<>();
+	String str = " ";
+	int i=1;
+	public String toString(int id) throws IllegalIDException, EmptyTreeException{
+		Vector<Node> vctrr = new Vector<>();
+		if(root==null){
+			throw new EmptyTreeException("there is no member in the company ");
+		}
+		Node nod = traverse(root,id);
+		if(nod==null){
+			throw new IllegalIDException("the given id member is not present ");
+		}
+		else {
+			if(i==1){
+				i+=1;
+				vctr2.add(nod);
+			}
+			Node nodd = vctr2.firstElement();
+			if(i==2){
+				vctrr.add(nod);
+				i+=3;
+			}
+			while(nodd!=null ){
+				for (int j = 0; j < nodd.vctr.toArray().length; j++) {
+					vctr2.add(nodd.vctr.elementAt(j));
+					System.out.println("aaa");
+					if(j==0){
+						System.out.println("abbb");
+						vctrr.add(nodd.vctr.elementAt(j));
+					}else{
+						if(vctrr.toArray().length > 1){
+							System.out.println("ddd");
+							int len = vctrr.toArray().length;
+							for (int l = 0; l < len; l++) {
+								System.out.println(vctrr.toArray().length);
+								System.out.println(vctrr.elementAt(0).data);
+								System.out.println(vctrr.elementAt(1).data);
+								if(l==0 && vctrr.elementAt(0).data > nodd.vctr.elementAt(j).data ){
+									System.out.println("eeee");
+									vctrr.add(0,nodd.vctr.elementAt(j));
+								}
+								if(l > 0){
+									System.out.println("fff");
+									System.out.println(l);
+									if(vctrr.elementAt(l).data > nodd.vctr.elementAt(j).data && vctrr.elementAt(l-1).data < nodd.vctr.elementAt(j).data ){
+										System.out.println("done");
+										vctrr.add(l,nodd.vctr.elementAt(j));
+									}else {
+										System.out.println("did");
+										vctrr.add(nodd.vctr.elementAt(j));
+									}
+								}
+							}
+						}
+					}
+				}
+				vctr2.remove(0);
+				if(vctr2.toArray().length > 0){
+					nodd = vctr2.firstElement();
+				}
+				if( vctr2.toArray().length == 0){
+					i = 1;
+					nodd = null;
+				}
+			}
+		}
+
+		System.out.println("gggggggggggggggggggggggggggggggggggggggg");
+		for (int j = 0; j < vctrr.toArray().length; j++) {
+			System.out.println(vctrr.elementAt(j).data);
+		}
+		for (int j = 0; j < vctrr.toArray().length; j++) {
+			if(j==0){
+				str += vctrr.elementAt(j).data;
+			}
+			if(j>0 && vctrr.elementAt(j).level == vctrr.elementAt(j-1).level){
+				str += " "+vctrr.elementAt(j).data;
+			}
+			if(j>0 && vctrr.elementAt(j).level != vctrr.elementAt(j-1).level){
+				str += ","+vctrr.elementAt(j).data;
+			}
+		}
+		String strg = "";
+		if(str.length() > 0){
+			strg = str;
+			str = "";
+		}
+		return strg;
+	}

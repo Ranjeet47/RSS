@@ -1,0 +1,334 @@
+import java.io.*; 
+import java.util.*; 
+
+// Tree node
+class Node {
+	int data;
+	int count;
+	int level;
+	Node parent ;
+	Vector<Node> vctr = new Vector<>();
+
+	Node(int datta ){
+		data = datta;
+		count = 0;
+		level = 0;
+		parent = null;
+	}
+}
+
+
+public class OrgHierarchy implements OrgHierarchyInterface{
+
+	Node root;
+	int countt;
+
+	Node noded = null;
+	int k = 0;
+	public Node traverse(Node nodd, int id){
+		if(k==0 && noded!=null){
+			noded = null;
+			k+=1;
+		}
+		System.out.println(nodd.data);
+		System.out.println(id);
+		if(nodd.data == id){
+			System.out.println("apy");
+			return nodd;
+		}
+		else {
+			if(nodd.vctr.toArray().length > 0){
+				for (int j = 0; j < nodd.vctr.toArray().length; j++) {
+					if(noded == null){
+						noded = traverse(nodd.vctr.elementAt(j),id );
+						System.out.println("asp");
+					}
+				}
+			}
+			else {
+				return null;
+			}
+		}
+
+		System.out.println("ffff");
+		if(nodd!=null && noded!=null){
+			System.out.println(nodd.data);
+			System.out.println(noded.data);
+		}
+
+		if(nodd.data == root.data){
+			System.out.println("vv");
+			k=0;
+		}
+
+		System.out.println("gg");
+		return noded;
+	}
+
+	public boolean isEmpty(){
+		if(root==null){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+    public int size(){
+		return countt;
+	}
+
+    public int level(int id) throws IllegalIDException, EmptyTreeException{
+		if(isEmpty()){
+			throw new EmptyTreeException("there is no data in the tree ");
+		}
+		else {
+			Node nod = traverse(root , id);
+			System.out.println(nod.data);
+			if(nod!=null){
+				return nod.level;
+			}
+			else {
+				throw new IllegalIDException("there is no member with given id");
+			}
+		}
+	}
+
+    public void hireOwner(int id) throws NotEmptyException{
+		if(root != null){
+			throw  new NotEmptyException("there ia already a owner in the given company");
+		}
+		else {
+			Node nod = new Node(id);
+			nod.level = 1;
+			countt += 1;
+			root = nod;
+		}
+	}
+
+
+	public void hireEmployee(int id, int bossid) throws IllegalIDException, EmptyTreeException{
+
+		if(root==null){
+			throw new EmptyTreeException("ther is No boss or No member present in company i.e Company is empty ");
+		}
+		if(root.data==bossid){
+			System.out.println("ppp");
+			Node nod = new Node(id);
+			root.vctr.add(nod);
+			nod.parent = root;
+			root.count += 1;
+			nod.level = 2;
+			countt += 1;
+			root.vctr.stream().sorted();
+		}
+		else {
+			Node nodee = new Node(id);
+			System.out.println(bossid);
+			System.out.println(root.data);
+			Node nodd = traverse(root,bossid);
+			if(nodd != null){
+				System.out.println(nodd.data);
+				System.out.println("qqqq");
+				nodee.level = nodd.level + 1;
+				nodd.count += 1;
+				nodd.vctr.add(nodee);
+				nodee.parent = nodd;
+				countt += 1;
+			}
+			else {
+				throw new IllegalIDException("there is no such boss present in the company");
+			}
+		}
+
+	}
+
+	public void fireEmployee(int id) throws IllegalIDException,EmptyTreeException{
+		if(root == null){
+			throw new EmptyTreeException("there is no element in the tree");
+		}
+
+		if(root.data == id){
+			throw new IllegalIDException("owner can not be deleted ");
+		}
+		else {
+			Node nodee = traverse(root, id);
+			if(nodee == null){
+				throw new IllegalIDException("there is no such member of company to be deleted ");
+			}
+			System.out.println(nodee.data);
+			System.out.println(nodee.count);
+			if(nodee.count == 0){
+				nodee.parent.count -= 1;
+				countt -= 1;
+				nodee.parent.vctr.remove(nodee);
+			}
+			else {
+				throw new IllegalIDException("Internal member of the company can not be deleted ");
+			}
+
+		}
+	}
+
+	public void fireEmployee(int id, int manageid) throws IllegalIDException,EmptyTreeException{
+		if(root==null){
+			throw new EmptyTreeException("there is no member present in the company");
+		}
+
+		if (root.data == id){
+			throw new IllegalIDException("owner can enot exchange juniors with anyone");
+		}
+
+		Node nodee = traverse(root , id);
+		System.out.println("hhh");
+		System.out.println(nodee.data);
+		if(nodee==null){
+			throw new IllegalIDException("there is no member with id in company");
+		}
+		else {
+			Vector<Node>  vctr1 = nodee.vctr;
+			nodee.count = 0;
+			System.out.println("jjj");
+			Node nodde = traverse(root , manageid);
+			if(nodde == null){
+				throw new IllegalIDException("given manageid does exist in the company");
+			}
+			else {
+				if(nodde.level == nodee.level){
+					for (int i = 0; i < vctr1.toArray().length; i++) {
+						nodde.vctr.add(vctr1.elementAt(i));
+						vctr1.elementAt(i).parent = nodde;
+					}
+					nodde.count += vctr1.toArray().length;
+					countt -= 1;
+
+					nodee.parent.count -= 1;
+					nodee.parent.vctr.remove(nodee);
+
+				}
+				else {
+					throw new IllegalIDException("both given id members are not at the same level");
+				}
+			}
+		}
+
+	}
+
+
+	public int boss(int id) throws IllegalIDException,EmptyTreeException{
+		if(root==null){
+			throw new EmptyTreeException("there is no member in thr company");
+		}
+
+		if(root.data == id){
+			throw new IllegalIDException("ownwer does not have any boss");
+		}
+
+		else {
+			Node noddd = traverse(root , id);
+			if(noddd != null){
+				return noddd.parent.data;
+			}
+			else {
+				throw new IllegalIDException("there is no member with given id");
+			}
+		}
+
+	}
+
+    public int lowestCommonBoss(int id1, int id2) throws IllegalIDException,EmptyTreeException{
+		if(root==null){
+			throw new EmptyTreeException("there is no member in the company");
+		}
+
+		if(root.data == id1 || root.data == id2){
+			return -1;
+		}
+		Node nod1 = traverse(root,id1);
+		Node nod2 = traverse(root ,id2);
+
+		if(nod1 == null || nod2 == null){
+			throw new IllegalIDException("there one of id or both is not present in the company");
+		}
+
+		while(nod1.parent != null ){
+			while(nod2.parent != null){
+				if(nod1.parent == nod2.parent){
+					return nod1.parent.data;
+				}else {
+					if(nod2.parent.parent != null){
+						nod2.parent = nod2.parent.parent;
+					}
+				}
+			}
+			if(nod1.parent.parent != null){
+				nod1.parent = nod1.parent.parent;
+			}
+		}
+
+		throw new IllegalIDException("there is no combine boss");
+	}
+
+
+	Vector<Node> vctr2 = new Vector<>();
+	String str = " ";
+	int i=1;
+	public String toString(int id) throws IllegalIDException, EmptyTreeException{
+		if(root==null){
+			throw new EmptyTreeException("the given company has no member");
+		}
+		Node nod = traverse(root,id);
+		System.out.println(root.data);
+		if(nod==null){
+			throw new IllegalIDException("the given id member is not persent");
+		}
+		else {
+			if(i==1){
+				i+=1;
+				System.out.println("a");
+				vctr2.add(nod);
+			}
+
+			Node nodd = vctr2.firstElement();
+			System.out.println("aa");
+
+			while(nodd!=null ){
+				System.out.println("aaa");
+				System.out.println(nodd.vctr.toArray().length);
+				System.out.println(nodd.count);
+				for (int j = 0; j < nodd.vctr.toArray().length; j++) {
+					System.out.println("iii");
+					System.out.println(nodd.vctr.elementAt(j).data);
+				}
+
+				for (int j = 0; j < nodd.vctr.toArray().length; j++) {
+					System.out.println("bbb");
+					vctr2.add(nodd.vctr.elementAt(j));
+				}
+
+				str += nodd.data +" ";
+				vctr2.remove(0);
+
+
+				if(vctr2.toArray().length > 0){
+					System.out.println("ddd");
+					nodd = vctr2.firstElement();
+				}
+
+				System.out.println(nodd.data);
+				if( vctr2.toArray().length == 0){
+					i = 1;
+					nodd = null;
+				}
+				System.out.println("ccc");
+			}
+		}
+		String strg = "";
+		if(str.length() > 0){
+			strg = str;
+			str = "";
+		}
+		return strg;
+	}
+
+}

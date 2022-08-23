@@ -1,0 +1,193 @@
+
+class Node {
+	int data;
+	int high;
+	Node left;
+	Node right;
+	Node up ;
+
+	Node(int datta ){
+		data = datta;
+		high = 0;
+		left = null;
+		right = null;
+		up = null;
+	}
+}
+public class checker
+{
+	static Node source ;
+
+
+	public static int height(Node node){
+		if(node == null){
+			return -1;
+		}else {
+			return node.high;
+		}
+	}
+
+	public static int greater(int x , int y){
+		if(x>y){
+			return x;
+		}
+		else {
+			return y;
+		}
+	}
+
+
+	public static Node rr(Node node){
+		Node y = node.left;
+		Node t = y.right;
+
+		y.right = node;
+		node.left = t;
+
+		node.high = greater( height(node.left) , height(node.right) )+1;
+		y.high = greater( height(y.left) , height(y.right ))+1;
+
+		return y;
+	}
+
+	public  static Node ll(Node node){
+		Node y = node.right;
+		Node t = y.left;
+
+		y.left = node;
+		node.right = t;
+
+		node.high = greater( height(node.left) , height(node.right) )+1;
+		y.high = greater( height(y.left) , height(y.right) ) + 1;
+
+		return y;
+	}
+
+	public static void insert(Node src , int idd){
+		if(source==null){
+			Node nd = new Node(idd);
+			source = nd;
+		}
+		else {
+			if(src.data <idd){
+				if(src.right != null){
+					insert(src.right , idd);
+				}
+				else {
+					Node ndd = new Node(idd);
+					src.right = ndd;
+					if(src.left == null ){
+						while (src != null){
+							src.high  += 1;
+							src = src.up;
+						}
+					}
+					while (src != null){
+						if( ((src.left.high-src.right.high) < -1) || ((src.left.high-src.right.high > 1)) ){
+							balance(src);
+							src = null;
+						}
+						else {
+							src = src.up;
+						}
+					}
+				}
+			}
+			else {
+				if(src.left != null){
+					insert(src.right , idd);
+				}
+				else {
+					Node ndd = new Node(idd);
+					src.left = ndd;
+					if(src.right == null ){
+						while (src != null){
+							src.high  += 1;
+							src = src.up;
+						}
+					}
+					while (src != null){
+						if( ((src.left.high-src.right.high) < -1) || ((src.left.high-src.right.high > 1)) ){
+							balance(src);
+							src = null;
+						}
+						else {
+							src = src.up;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public static void delete(Node srs , int ide ){
+		if(srs.left.data == ide){
+			if(srs.left.left != null && srs.left.right != null){
+				srs.left = null;
+				if (srs.right.high >= 1){
+					while (srs != null){
+						balance(srs);
+						srs = srs.up;
+					}
+				}
+				else {
+					if(srs.right == null ){
+						while (srs !=null){
+							srs.high -= 1;
+							srs = srs.up;
+						}
+					}
+				}
+			}
+			if(srs.left.left == null && srs.left.right != null){
+				int hgt = srs.high;
+				srs.left = srs.left.right ;
+
+				if(srs.left.high > srs.right.high){
+					srs.high = srs.left.high + 1;
+				}
+				else {
+					srs.high = srs.right.high + 1;
+				}
+				if( ((srs.left.high-srs.right.high) < -1) || ((srs.left.high-srs.right.high > 1)) ){
+					while (srs != null){
+						balance(srs);
+						srs = srs.up;
+					}
+				}
+
+				if(hgt > srs.high){
+					while (srs != null){
+						srs = srs.up;
+					}
+				}
+			}
+
+			if(srs.left.left != null && srs.left.right == null){
+
+			}
+		}
+	}
+
+	public static void balance(Node nodd){
+
+	}
+
+	public static void main ( String args [])
+	{
+		checker chk = new checker();
+
+		Node nod1 = new Node(6);
+		Node nod2 = new Node(9);
+		Node nod3 = new Node(11);
+		Node nod4 = new Node(667);
+		Node nod5 = new Node(678);
+		Node nod6 = new Node(681);
+		Node nod7 = new Node(687);
+		Node nod8 = new Node(693);
+		Node nod9 = new Node(698);
+		Node nod10 = new Node(6741);
+		Node nod11= new Node(6829);
+
+	}
+}

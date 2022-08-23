@@ -1,0 +1,497 @@
+package com.company;
+
+
+
+import java.util.*;
+
+class Node {
+    int data;
+    int level;
+    Node parent ;
+    Vector<Node> child = new Vector<>();
+
+    Node(int datta ){
+        data = datta;
+        level = 0;
+        parent = null;
+    }
+}
+
+
+public class Main{
+
+    Node root;
+    int countt;
+    Vector<Node> vctor1 = new Vector<>();
+
+    public int optInd(Vector<Node> vctor1, int id){
+        Object[] array = vctor1.toArray();
+        Node[] arr1 = Arrays.copyOf(array, array.length, Node[].class);
+        return Ind(arr1 , 0,vctor1.size(),id);
+    }
+    public int Ind(Node[] arr ,int st , int end , int idd){
+        if(idd>arr[arr.length-1].data){
+            return arr.length;
+        }
+        if(end >= st){
+            int mid = st + ((end-st)/2);
+            if(arr[mid].data == idd){
+                return mid;
+            }else {
+                if(arr[mid].data < idd){
+                    return Ind(arr , (mid+1) , end , idd);
+                }
+                else {
+                    return Ind(arr ,st ,  ( mid -1) , idd );
+                }
+            }
+        }
+        else {
+            return (st + ((end-st)/2));
+        }
+    }
+
+    public Node traverse(Vector<Node> vctor1, int id){
+        Object[] array = vctor1.toArray();
+        Node[] arr1 = Arrays.copyOf(array, array.length, Node[].class);
+        return tra(arr1 , 0,vctor1.size(),id);
+    }
+    public Node tra(Node[] arr ,int st , int end , int idd){
+        if(end >= st){
+            int mid = st + ((end-st)/2);
+            if(arr[mid].data == idd){
+                return arr[mid];
+            }else {
+                if(arr[mid].data < idd){
+                    return tra(arr , (mid+1) , end , idd);
+                }
+                else {
+                    return tra(arr ,st ,  ( mid -1) , idd );
+                }
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
+    public boolean isEmpty(){
+        if(root==null){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public int size(){
+        return countt;
+    }
+
+    public int level(int id) {
+        if(isEmpty()){
+            System.out.println("there is no data in the tree ");
+            return -1;
+        }
+        else {
+            Node nod = traverse(vctor1,id);
+            if( nod!=null ){
+                return nod.level;
+            }
+            else {
+                System.out.println("there is no member with given id");
+                return -1;
+            }
+        }
+    }
+
+    public void hireOwner(int id) {
+        if(root != null){
+            System.out.println("there is already a owner in the given company");
+            return;
+        }
+        else {
+            Node nod = new Node(id);
+            vctor1.add(nod);
+            nod.level = 1;
+            countt += 1;
+            root = nod;
+        }
+    }
+
+
+    public void hireEmployee(int id, int bossid) {
+
+        if(root==null){
+            System.out.println("ther is No boss or No member present in company i.e Company is empty ");
+            return;
+        }
+        if(root.data==bossid){
+            Node nod = new Node(id);
+            root.child.add(nod);
+            int ind = optInd(vctor1,id);
+            vctor1.add(ind , nod);
+            nod.parent = root;
+            nod.level = root.level + 1;
+        }
+        else {
+            Node nodd = traverse(vctor1,bossid);
+            if (nodd!= null){
+                Node nod = new Node(id);
+                nodd.child.add(nod);
+                int ind = optInd(vctor1,id);
+                vctor1.add(ind , nod);
+                nod.parent = nodd;
+                nod.level = nodd.level + 1;
+            }
+            else {
+                System.out.println("there is no such boss present in the company");
+            }
+        }
+    }
+
+    public void fireEmployee(int id) {
+        if(root == null){
+            System.out.println("there is no element in the tree");
+            return;
+        }
+
+        if(root.data == id){
+            System.out.println("owner can not be deleted ");
+            return;
+        }
+        else {
+            Node nodee = traverse(vctor1 , id);
+            if(nodee==null){
+                System.out.println("there is no such member to be deleted ");
+                return;
+            }
+            if(nodee.child.size() == 0){
+                vctor1.remove(nodee);
+                countt-=1;
+                nodee.parent.child.remove(nodee);
+            }
+            else {
+                System.out.println("internal member can not be deleted ");
+                return;
+            }
+        }
+    }
+
+    public void fireEmployee(int id, int manageid) {
+        if(root==null){
+            System.out.println("there is no member present in the company");
+            return;
+        }
+
+        if (root.data == id){
+            System.out.println("owner can not exchange juniors with anyone");
+            return;
+        }
+
+        Node nodee = traverse(vctor1 , id);
+        if(nodee==null){
+            System.out.println("there is no member with id in company");
+            return;
+        }
+        else {
+            Vector<Node>  vctr1 = nodee.child;
+            Node nodde = traverse(vctor1, manageid);
+            if(nodde == null){
+                System.out.println(("given manageid does exist in the company"));
+                return;
+            }
+            else {
+                if(nodde.level == nodee.level){
+                    for (int i = 0; i < vctr1.toArray().length; i++) {
+                        nodde.child.add(vctr1.elementAt(i));
+                        vctr1.elementAt(i).parent = nodde;
+                    }
+                    countt -= 1;
+                    nodee.parent.child.remove(nodee);
+                    vctor1.remove(nodee);
+                }
+                else {
+                    System.out.println(("both given id members are not at the same level"));
+                    return;
+                }
+            }
+        }
+
+    }
+
+
+    public int boss(int id) {
+        if(root==null){
+            System.out.println("there is no member in thr company");
+            return -1;
+        }
+
+        if(root.data == id){
+            System.out.println("ownwer does not have any boss");
+            return -1;
+        }
+
+        else {
+            Node noddd = traverse(vctor1 , id);
+            if(noddd != null){
+                return noddd.parent.data;
+            }
+            else {
+                System.out.println("there is no member with given id");
+                return -1;
+            }
+        }
+
+    }
+
+    public int lowestCommonBoss(int id1, int id2) {
+        if(root==null){
+            System.out.println("there is no member in the company");
+            return -1;
+        }
+
+        if(root.data == id1 || root.data == id2){
+            return -1;
+        }
+        Node nod1 = traverse(vctor1 , id1);
+        Node nod2 = traverse(vctor1 , id2);
+        if(nod1 == null || nod2 == null){
+            System.out.println("there one of id or both is not present in the company");
+            return -1;
+        }
+
+        if(nod1.data == nod2.data){
+            System.out.println(("both the ids are same "));
+            return -1;
+        }
+        while(nod1.parent != null ){
+            Node nodd = nod2;
+            while(nod2.parent != null){
+                if(nod1.parent == nod2.parent){
+                    return nod1.parent.data;
+                }else {
+                    if(nod2.parent.parent != null){
+                        nod2 = nod2.parent;
+                    }else {
+                        nod2 = nodd;
+                        nod1 = nod1.parent;
+                    }
+                }
+            }
+            if(nod1.parent.parent != null){
+                nod1.parent = nod1.parent.parent;
+            }
+        }
+        System.out.println("there is no combine boss");
+        return -1;
+    }
+
+
+
+    Vector<Node> vctr2 = new Vector<>();
+    String str = " ";
+    int i=1;
+    public String toString(int id) {
+        Vector<Node> vctrr = new Vector<>();
+        if(root==null){
+            System.out.println("there is no member in the company ");
+            return str;
+        }
+        Node nod = traverse(vctor1 , id);
+        if(nod==null){
+            System.out.println("the given id member is not present ");
+            return str;
+        }
+        else {
+            if(i==1){
+                i+=1;
+                vctr2.add(nod);
+                vctrr.add(nod);
+            }
+            Node nodd = vctr2.firstElement();
+
+            while(nodd!=null ){
+                for (int j = 0; j < nodd.child.toArray().length; j++) {
+                    vctr2.add(nodd.child.elementAt(j));
+                    vctrr.add(nodd.child.elementAt(j));
+                }
+
+                vctr2.remove(0);
+                if(!vctr2.isEmpty()){
+                    nodd = vctr2.firstElement();
+                }
+                if(vctr2.isEmpty()){
+                    nodd = null;
+                }
+            }
+        }
+        Vector<Node> vct = new Vector<>();
+        Vector<Node> vctot = new Vector<>();
+        for (int j = 0; j < vctrr.toArray().length; j++) {
+            if(vctot.toArray().length ==0){
+                vctot.add(vctrr.elementAt(j));
+                if(j==vctrr.toArray().length-1){
+                    for (int l = 0; l < vctot.toArray().length; l++) {
+                        vct.add(vctot.elementAt(l));
+                    }
+                }
+            }
+            else {
+                if (vctot.toArray().length > 0 && vctrr.elementAt(j).level != vctot.lastElement().level) {
+                    for (int l = 0; l < vctot.toArray().length; l++) {
+                        vct.add(vctot.elementAt(l));
+                    }
+                    vctot.clear();
+                    vctot.add(vctrr.elementAt(j));
+                    if(j==vctrr.toArray().length-1){
+                        for (int l = 0; l < vctot.toArray().length; l++) {
+                            vct.add(vctot.elementAt(l));
+                        }
+                    }
+                } else {
+                    int len = vctot.toArray().length;
+                    int l = 0;
+                    while(l< len) {
+                        if (l==0 ){
+                            if (vctot.elementAt(l).data > vctrr.elementAt(j).data) {
+                                vctot.add(0, vctrr.elementAt(j));
+                                if (j == vctrr.toArray().length - 1) {
+                                    for (int k = 0; k < vctot.toArray().length; k++) {
+                                        vct.add(vctot.elementAt(k));
+                                    }
+                                }
+                                l = len;
+                            }
+                            else {
+                                if(l==len-1 && vctot.elementAt(l).data < vctrr.elementAt(j).data){
+                                    vctot.add(1, vctrr.elementAt(j));
+                                    if(j==vctrr.toArray().length-1){
+                                        for (int k = 0; k < vctot.toArray().length; k++) {
+                                            vct.add(vctot.elementAt(k));
+                                        }
+                                    }
+                                    l = len;
+                                }
+                            }
+                        }
+                        if(l > 0) {
+                            if (vctot.elementAt(l).data > vctrr.elementAt(j).data && vctot.elementAt(l - 1).data < vctrr.elementAt(j).data) {
+                                vctot.add(l, vctrr.elementAt(j));
+                                if(j==vctrr.toArray().length-1){
+                                    for (int k = 0; k < vctot.toArray().length; k++) {
+                                        vct.add(vctot.elementAt(k));
+                                    }
+                                }
+                                l = len;
+                            } else {
+                                if(l==len-1){
+                                    vctot.add(vctrr.elementAt(j));
+                                    if(j==vctrr.toArray().length-1){
+                                        for (int k = 0; k < vctot.toArray().length; k++) {
+                                            vct.add(vctot.elementAt(k));
+                                        }
+                                    }
+                                    l = len;
+                                }
+                            }
+                        }
+                        l+=1;
+                    }
+                }
+            }
+        }
+
+        for (int j = 0; j < vct.toArray().length; j++) {
+            if(j==0){
+                str += vct.elementAt(j).data;
+            }
+            if(j>0 && vct.elementAt(j).level == vct.elementAt(j-1).level){
+                str += " "+vct.elementAt(j).data;
+            }
+            if(j>0 && vct.elementAt(j).level != vct.elementAt(j-1).level){
+                str += ","+vct.elementAt(j).data;
+            }
+        }
+        String strg = "";
+        if(str.length() > 0){
+            strg = str;
+            i = 1;
+            str = "";
+        }
+        return strg;
+    }
+    public static void main(String[] args) {
+        Main mn = new Main();
+        mn.hireOwner(8);
+        System.out.println(mn.toString(8));
+        mn.hireOwner(7);
+        mn.hireEmployee(7,8);
+        mn.hireEmployee(9,8);
+        mn.hireEmployee(19,9);
+        mn.hireEmployee(20,9);
+        mn.hireEmployee(4,7);
+
+        mn.fireEmployee(7);
+        mn.fireEmployee(19,9);
+        mn.fireEmployee(7,9);
+        System.out.println(mn.toString(8));
+
+        mn.hireEmployee(11,4);
+        System.out.println(mn.toString(8));
+
+        mn.hireEmployee(119,20);
+        mn.hireEmployee(18,11);
+        System.out.println(mn.toString(8));
+
+        mn.hireEmployee(200,8);
+        mn.hireEmployee(40,200);
+
+        System.out.println(mn.toString(8));
+        mn.fireEmployee(7);
+        mn.fireEmployee(18);
+        mn.fireEmployee(200,9);
+        System.out.println(mn.lowestCommonBoss(11,40));
+
+        mn.hireEmployee(70,8);
+        mn.hireEmployee(90,70);
+        mn.hireEmployee(190,20);
+        mn.hireEmployee(21,11);
+        mn.hireEmployee(17,21);
+
+        mn.fireEmployee(19);
+        mn.fireEmployee(20,40);
+        mn.fireEmployee(9,70);
+        System.out.println(mn.toString(8));
+
+        mn.hireEmployee(700,119);
+        mn.hireEmployee(900,119);
+        mn.hireEmployee(60,900);
+        mn.hireEmployee(180,21);
+        mn.hireEmployee(210,21);
+        mn.hireEmployee(170,21);
+        mn.hireEmployee(67,190);
+        System.out.println(mn.toString(8));
+
+        mn.fireEmployee(4,90);
+        mn.fireEmployee(21,700);
+
+        System.out.println(mn.lowestCommonBoss(900,17));
+        System.out.println(mn.toString(8));
+
+
+        mn.hireEmployee(89,119);
+        mn.hireEmployee(65,11);
+        mn.hireEmployee(78,40);
+        mn.hireEmployee(66,70);
+        mn.hireEmployee(50,40);
+        System.out.println(mn.toString(8));
+
+        mn.fireEmployee(700,89);
+        mn.fireEmployee(40,90);
+
+        System.out.println(mn.boss(8));
+        System.out.println(mn.lowestCommonBoss(8,70));
+        System.out.println(mn.toString(8));
+    }
+}

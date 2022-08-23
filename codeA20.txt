@@ -1,0 +1,31 @@
+Node noded = null;
+	public Node traverse(Node nodd, int id){
+		System.out.println(nodd.data);
+		System.out.println(id);
+		if(nodd.data == id){
+			System.out.println("apy");
+			return nodd;
+		}
+		else {
+			if(nodd.vctr.toArray().length > 0){
+				for (int j = 0; j < nodd.vctr.toArray().length; j++) {
+					if(noded == null){
+						noded = traverse(nodd.vctr.elementAt(j),id );
+						System.out.println("asp");
+					}
+				}
+			}
+			else {
+				return null;
+			}
+		}
+		System.out.println("gfh");
+		Node noddd = null;
+		if(noded!=null){
+			System.out.println("mmmm");
+			noddd = noded;
+			noded = null;
+		}
+		System.out.println("nnnn");
+		return noddd;
+	}

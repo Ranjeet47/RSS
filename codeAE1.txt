@@ -1,0 +1,79 @@
+import java.util.Arrays;
+import java.util.Vector;
+
+class Node {
+	int data;
+	int level;
+	int index;
+	Node parent ;
+	Vector<Node> child = new Vector<>();
+
+	Node(int datta ){
+		data = datta;
+		index = 0;
+		level = 0;
+		parent = null;
+	}
+}
+public class checker
+{
+	public int optInd(Vector<Node> vctor1, int id){
+		Object[] array = vctor1.toArray();
+		Node[] arr1 = Arrays.copyOf(array, array.length, Node[].class);
+		return Ind(arr1 , 0,vctor1.size(),id);
+	}
+	public int Ind(Node[] arr ,int st , int end , int idd){
+		if(idd>arr[arr.length-1].data){
+			return arr.length;
+		}
+		if(end >= st){
+			int mid = st + ((end-st)/2);
+			if(arr[mid].data == idd){
+				return mid;
+			}else {
+				if(arr[mid].data < idd){
+					return Ind(arr , (mid+1) , end , idd);
+				}
+				else {
+					return Ind(arr ,st ,  ( mid -1) , idd );
+				}
+			}
+		}
+		else {
+			return (st + ((end-st)/2));
+		}
+	}
+	public static void main ( String args [])
+	{
+		Vector<Node> vct = new Vector<>();
+		Node nod1 = new Node(6);
+		Node nod2 = new Node(9);
+		Node nod3 = new Node(11);
+		Node nod4 = new Node(667);
+		Node nod5 = new Node(678);
+		Node nod6 = new Node(681);
+		Node nod7 = new Node(687);
+		Node nod8 = new Node(693);
+		Node nod9 = new Node(698);
+		Node nod10 = new Node(6741);
+		Node nod11= new Node(6829);
+
+		vct.add(nod1);
+		vct.add(nod2);
+		vct.add(nod3);
+		vct.add(nod4);
+		vct.add(nod5);
+		vct.add(nod6);
+		vct.add(nod7);
+		vct.add(nod8);
+		vct.add(nod9);
+		vct.add(nod10);
+		vct.add(nod11);
+
+
+		checker chk = new checker();
+		int nt = chk.tra(vct,6828);
+		System.out.println(nt);
+
+	}
+}

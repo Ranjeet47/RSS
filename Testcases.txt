@@ -1,0 +1,79 @@
+        Main mn = new Main();
+        mn.hireOwner(8);
+        System.out.println(mn.toString(8));
+        mn.hireOwner(7);
+        mn.hireEmployee(7,8);
+        mn.hireEmployee(9,8);
+        mn.hireEmployee(19,9);
+        mn.hireEmployee(20,9);
+        mn.hireEmployee(4,7);
+        System.out.println(mn.toString(9));
+
+        mn.fireEmployee(7);
+        mn.fireEmployee(19,9);
+        mn.fireEmployee(7,9);
+        System.out.println(mn.toString(8));
+
+        mn.hireEmployee(11,4);
+        System.out.println(mn.toString(8));
+
+        mn.hireEmployee(119,20);
+        mn.hireEmployee(18,11);
+        System.out.println(mn.toString(8));
+
+        mn.hireEmployee(200,8);
+        mn.hireEmployee(40,200);
+
+        System.out.println(mn.toString(8));
+        mn.fireEmployee(7);
+        mn.fireEmployee(18);
+        mn.fireEmployee(200,9);
+        System.out.println(mn.lowestCommonBoss(40,11));
+
+        mn.hireEmployee(70,8);
+        mn.hireEmployee(90,70);
+        mn.hireEmployee(190,20);
+        mn.hireEmployee(21,11);
+        mn.hireEmployee(17,21);
+        System.out.println(mn.toString(8));
+
+        mn.fireEmployee(19);
+        mn.fireEmployee(20,40);
+        mn.fireEmployee(9,70);
+        System.out.println(mn.toString(8));
+
+        mn.hireEmployee(700,119);
+        mn.hireEmployee(900,119);
+        mn.hireEmployee(60,900);
+        mn.hireEmployee(180,21);
+        mn.hireEmployee(210,21);
+        mn.hireEmployee(170,21);
+        mn.hireEmployee(67,190);
+        System.out.println(mn.toString(8));
+
+        mn.fireEmployee(4,90);
+        mn.fireEmployee(21,700);
+
+        System.out.println(mn.lowestCommonBoss(11,170));
+        System.out.println(mn.toString(8));
+
+
+        mn.hireEmployee(89,119);
+        mn.hireEmployee(65,11);
+        mn.hireEmployee(78,40);
+        mn.hireEmployee(66,70);
+        mn.hireEmployee(50,40);
+        System.out.println(mn.toString(8));
+
+        mn.fireEmployee(700,89);
+        System.out.println("aa");
+        mn.fireEmployee(40,90);
+        System.out.println("bb");
+
+        System.out.println(mn.boss(8));
+        System.out.println(mn.lowestCommonBoss(8,70));
+        System.out.println(mn.lowestCommonBoss(89,70));
+        System.out.println(mn.toString(8));
+
+        System.out.println(mn.countt);
+        System.out.println(mn.boss(67));

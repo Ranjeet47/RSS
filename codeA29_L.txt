@@ -1,0 +1,143 @@
+Vector<Node> vctr2 = new Vector<>();
+    String str = " ";
+    int i=1;
+    public String toString(int id) {
+        Vector<Node> vctrr = new Vector<>();
+        if(root==null){
+            System.out.println("there is no member in the company ");
+            return str;
+        }
+        Node nod = traverse(root,id);
+        if(nod==null){
+            System.out.println("the given id member is not present ");
+            return str;
+        }
+        else {
+            if(i==1){
+                i+=1;
+                vctr2.add(nod);
+                vctrr.add(nod);
+            }
+            Node nodd = vctr2.firstElement();
+
+            while(nodd!=null ){
+                for (int j = 0; j < nodd.vctr.toArray().length; j++) {
+                    vctr2.add(nodd.vctr.elementAt(j));
+                    vctrr.add(nodd.vctr.elementAt(j));
+                }
+
+                vctr2.remove(0);
+                if(!vctr2.isEmpty()){
+                    nodd = vctr2.firstElement();
+                }
+                if(vctr2.isEmpty()){
+                    nodd = null;
+                }
+            }
+        }
+
+        Vector<Node> vct = new Vector<>();
+        Vector<Node> vctot = new Vector<>();
+        for (int j = 0; j < vctrr.toArray().length; j++) {
+            System.out.println(vctrr.elementAt(j).data);
+            System.out.println(vct.toArray().length);
+            if(vctot.toArray().length ==0){
+                vctot.add(vctrr.elementAt(j));
+                System.out.println("a");
+                if(j==vctrr.toArray().length-1){
+                    for (int l = 0; l < vctot.toArray().length; l++) {
+                        vct.add(vctot.elementAt(l));
+                    }
+                }
+            }
+            else {
+                if (vctot.toArray().length > 0 && vctrr.elementAt(j).level != vctot.lastElement().level) {
+                    System.out.println("aa");
+                    for (int l = 0; l < vctot.toArray().length; l++) {
+                        vct.add(vctot.elementAt(l));
+                    }
+                    vctot.clear();
+                    vctot.add(vctrr.elementAt(j));
+                    if(j==vctrr.toArray().length-1){
+                        for (int l = 0; l < vctot.toArray().length; l++) {
+                            vct.add(vctot.elementAt(l));
+                        }
+                    }
+                } else {
+                    System.out.println("bbb");
+                    int len = vctot.toArray().length;
+                    int l = 0;
+                    while(l< len) {
+                        if (l==0 ){
+                            System.out.println("cc");
+                            if (vctot.elementAt(l).data > vctrr.elementAt(j).data) {
+                                vctot.add(0, vctrr.elementAt(j));
+                                if (j == vctrr.toArray().length - 1) {
+                                    System.out.println("vvv");
+                                    for (int k = 0; k < vctot.toArray().length; k++) {
+                                        vct.add(vctot.elementAt(k));
+                                    }
+                                    l = len;
+                                }
+                            }
+                            else {
+                                System.out.println("dd");
+                                if(l==len-1 && vctot.elementAt(l).data < vctrr.elementAt(j).data){
+                                    System.out.println("ddd");
+                                    vctot.add(1, vctrr.elementAt(j));
+                                    if(j==vctrr.toArray().length-1){
+                                        for (int k = 0; k < vctot.toArray().length; k++) {
+                                            vct.add(vctot.elementAt(k));
+                                        }
+                                        l = len;
+                                    }
+                                }
+                            }
+                        }
+                        if(l > 0) {
+                            System.out.println("ddd");
+                            if (vctot.elementAt(l).data > vctrr.elementAt(j).data && vctot.elementAt(l - 1).data < vctrr.elementAt(j).data) {
+                                vctot.add(l, vctrr.elementAt(j));
+                                if(j==vctrr.toArray().length-1){
+                                    for (int k = 0; k < vctot.toArray().length; k++) {
+                                        vct.add(vctot.elementAt(k));
+                                    }
+                                    l = len;
+                                }
+                            } else {
+                                if(l==len-1){
+                                    vctot.add(vctrr.elementAt(j));
+                                    if(j==vctrr.toArray().length-1){
+                                        for (int k = 0; k < vctot.toArray().length; k++) {
+                                            vct.add(vctot.elementAt(k));
+                                        }
+                                        l = len;
+                                    }
+                                }
+                            }
+                        }
+                        l+=1;
+                    }
+                }
+            }
+        }
+
+        for (int j = 0; j < vct.toArray().length; j++) {
+            if(j==0){
+                str += vct.elementAt(j).data;
+            }
+            if(j>0 && vct.elementAt(j).level == vct.elementAt(j-1).level){
+                str += " "+vct.elementAt(j).data;
+            }
+            if(j>0 && vct.elementAt(j).level != vct.elementAt(j-1).level){
+                str += ","+vct.elementAt(j).data;
+            }
+        }
+        String strg = "";
+        if(str.length() > 0){
+            strg = str;
+            i = 1;
+            str = "";
+        }
+        return strg;
+    }

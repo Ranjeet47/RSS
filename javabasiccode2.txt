@@ -1,0 +1,881 @@
+package com.company;
+
+import org.w3c.dom.ls.LSOutput;
+
+import java.awt.*;
+import java.awt.desktop.SystemEventListener;
+import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
+
+class Main{
+    public static void main(String[] args){
+        System.out.println("I love anup");
+    }
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// I am going to discuss about java thread .....and many other concepts
+
+// when we do have to take multiple inheritance then we will implement runnable which is an interface
+
+// below is the parralel thread .multiple thread working on the same printer
+
+//we did also used sychronization when both the thread are working on same pointer
+//
+//class Printer{
+//    //synchronized void doIt(int numcop , String docname ){
+//    void doIt(int numcop , String docname ){
+//        for(int i=1;i<=numcop;i++){
+//            System.out.println("printing"+docname+"pdf"+i);
+//        }
+//    }
+//}
+//class Mythred extends Thread{
+//    Printer  pref;
+//
+//    Mythred(Printer p){
+//        pref = p;
+//    }
+//
+//    public  void run(){
+//        synchronized (pref) {
+//            pref.doIt(10, "josprofile");
+//        }
+//    }
+//}
+//
+//class Ythred extends Thread{
+//    Printer pref;
+//
+//    Ythred(Printer p){
+//        pref = p;
+//    }
+//
+//    public  void run(){
+//        synchronized (pref) {
+//            pref.doIt(10, "thomasprofile");
+//        }
+//    }
+//}
+//class Main{
+//    public static void main(String[] args){
+//
+//        System.out.println("app started");
+//
+//        Printer prt = new Printer();
+//        Mythred thrd = new Mythred(prt) ;
+//        thrd.start();
+//        Ythred thrdd = new Ythred(prt);
+//        thrdd.start();
+//
+//        System.out.println("app ended");
+//    }
+
+
+
+
+
+
+//class Ca{
+//
+//}
+//class Task extends Ca implements Runnable {
+//    public void run(){
+//        for(int doc = 0 ; doc<=10 ;doc+=1){
+//            System.out.println("printing document ## 2");
+//        }
+//    }
+//}
+//
+//class Work implements Runnable {
+//    public void run(){
+//        for(int doc = 0 ; doc<=10 ;doc+=1){
+//            System.out.println("printing document ## 3");
+//        }
+//    }
+//}
+//
+//class Main{
+//    public static void main(String[] args){     // main method rep main thread
+//
+//        System.out.println("app started ");
+//
+//        Runnable tsk1 = new Task();       // mytask is a child thread or worker thread there
+//        Thread thrd = new Thread(tsk1);
+//        thrd.start();           // start internally excecutes the run method  // main thread and my task thread is executing parrallely
+//
+//
+//        Thread thrdd = new Thread(new Work());
+//        thrdd.start();
+//
+//        // after above thread is not completed below process is not started
+//        // in case long process we will get that ..application not responding
+//
+//        int doc = 0;
+//        for ( doc = 0; doc <= 10; doc++) {
+//            System.out.println("printing documnet ## 1");
+//        }
+//
+//        System.out.println("app terminated");
+//    }
+//
+//
+
+
+
+
+
+
+//class Ca{
+//
+//}
+//class Task extends Ca implements Runnable {
+//    public void run(){
+//        for(int doc = 0 ; doc<=10 ;doc+=1){
+//            System.out.println("printing document ## 2");
+//        }
+//    }
+//}
+//class Main{
+//    public static void main(String[] args){     // main method rep main thread
+//
+//        System.out.println("app started ");
+//
+//        Runnable tsk1 = new Task();       // mytask is a child thread or worker thread there
+//        Thread thrd = new Thread(tsk1);
+//        thrd.start();           // start internally excecutes the run method  // main thread and my task thread is executing parrallely
+//
+//
+//        // after above thread is not completed below process is not started
+//        // in case long process we will get that ..application not responding
+//
+//        int doc = 0;
+//        for ( doc = 0; doc <= 10; doc++) {
+//            System.out.println("printing documnet ## 1");
+//        }
+//
+//        System.out.println("app terminated");
+//    }
+//
+
+
+
+
+
+//class Task extends Thread{
+//    public void run(){
+//        for(int doc = 0 ; doc<=10 ;doc+=1){
+//            System.out.println("printing document ## 2");
+//        }
+//    }
+//}
+//class Main{
+//    public static void main(String[] args){     // main method rep main thread
+//
+//        System.out.println("app started ");
+//
+//        Task tsk1 = new Task();   // mytask is a child thread or worker thread there
+//        tsk1.start();           // start internally excecutes the run method  // main thread and my task thread is executing parrallely
+//
+//
+//        // after above thread is not completed below process is not started
+//        // in case long process we will get that ..application not responding
+//
+//        int doc = 0;
+//        for ( doc = 0; doc <= 10; doc++) {
+//            System.out.println("printing documnet ## 1");
+//        }
+//
+//        System.out.println("app terminated");
+//    }
+
+
+
+
+//class Task{
+//    void doIt(){
+//        for(int doc = 0 ; doc<=10 ;doc+=1){
+//            System.out.println("printing document ## 2");
+//        }
+//    }
+//}
+//class Main{
+//    public static void main(String[] args){     // main method rep main thread
+//
+//        System.out.println("app started ");
+//
+//        Task tsk1 = new Task();
+//        tsk1.doIt();
+//
+//        // after above thread is not completed below process is not started
+//        // in case long process we will get that ..application not responding
+//
+//        int doc = 0;
+//        for ( doc = 0; doc <= 10; doc++) {
+//            System.out.println("printing documnet ## 1");
+//        }
+//
+//        System.out.println("app terminated");
+//    }
+//
+
+
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// we are going to discuss interfaces .....here abstract classes and interfaces are similar but they are different in many cases
+
+
+
+//
+//interface Writer{
+//    void write();       // interface method are public abstract by default
+//}
+//
+//class Pen implements Writer{   // we can not have multiple implement together but we can have multiple implements
+//    public void write()
+//    {
+//        System.out.println("i am a pen");
+//    }
+//}
+//class Pencil implements Writer {
+//    public void write(){
+//        System.out.println("i am pencil");
+//    }
+//
+//}
+//
+//class Kit{
+////    public void doSomething(Pen p){
+////        p.write();
+////    }
+//
+////    public void doSomething(Pencil p){
+////        p.write();
+////    }
+//
+//    public void doSomething(Writer p)
+//    {
+//        p.write();
+//    }
+//}
+//
+//class Main{
+//    public static void main(String[] args){
+//        Kit kt1 = new Kit();
+//        Writer  pn = new Pen();
+//        Writer pnc = new Pencil();     // we only can create reference of interfece not object of interface.
+//        kt1.doSomething(pn);          // we only can create ref of super class not object of interface
+//        kt1.doSomething(pnc);
+//    }
+
+
+
+
+
+//abstract class Writer{
+//    public abstract void write();
+//}
+//
+//class Pen extends Writer{
+//public void write()
+//    {
+//        System.out.println("i am a pen");
+//    }
+//}
+//class Pencil extends Writer {
+//    public void write(){
+//        System.out.println("i am pencil");
+//    }
+//
+//}
+//
+//class Kit{
+////    public void doSomething(Pen p){
+////        p.write();
+////    }
+//
+////    public void doSomething(Pencil p){
+////        p.write();
+////    }
+//
+//    public void doSomething(Writer p)
+//    {
+//        p.write();
+//    }
+//}
+//
+//class Main{
+//    public static void main(String[] args){
+//        Kit kt1 = new Kit();
+//        Writer  pn = new Pen();
+//        Writer pnc = new Pencil();     // we only can create reference of interfece not object of interface.
+//        kt1.doSomething(pn);
+//        kt1.doSomething(pnc);
+//    }
+
+
+
+//class Pen{
+//    public void write(){
+//        System.out.println("i am a pen");
+//    }
+//}
+//class Pencil{
+//    public void write(){
+//        System.out.println("i am pencil");
+//    }
+//
+//}
+//
+//class Kit{
+//    public void doSomething(Pen p){
+//        p.write();
+//    }
+//        // here if i have to take the reference of the abstract class than we do not have to write the same commands two times for different class
+//    public void doSomething(Pencil p){
+//        p.write();
+//    }
+//}
+//
+//class Main{
+//    public static void main(String[] args){
+//        Kit kt1 = new Kit();
+//        Pen pn = new Pen();
+//        Pencil pnc = new Pencil();
+//        kt1.doSomething(pn);
+//        kt1.doSomething(pnc);
+//    }
+//
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// abstract class demo explained
+
+//abstract class Human{
+//    public abstract void eat();
+//    public void walk()
+//    {
+//
+//    }
+//}
+//
+//class Man extends Human {
+//    public void eat(){
+//
+//    }
+//}
+//class Main{
+//    public static void main(String[] args){
+//        Human hm = new Man();
+//
+//    }
+
+
+// here number is abstract class for int and double
+//
+//class Printer{
+////    public void show(int i){
+////        System.out.println(i);
+////    }
+////    public void show(double i){
+////        System.out.println(i);
+////    }
+//    public void show(Number i){
+//        System.out.println(i);
+//    }
+//}
+//    class Main{
+//        public static void main(String[] args){
+//            Printer prt = new Printer();
+//            prt.show(55.5);
+//        }
+//
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// Exception hamdlig is explained here
+
+//public class Main{
+
+
+//    public static void thrw(){
+//        try{
+//            throw new ArrayIndexOutOfBoundsException("demo");
+//        }
+//        catch(IndexOutOfBoundsException e){
+//            System.out.println("it's caught");
+//        }
+//    }
+//    public static void main(String[] args){
+//        thrw();
+//    }
+
+
+//        try{
+//            String me = null ;
+//            System.out.println(me.length());
+//        }
+//        catch (NullPointerException e)
+//        {
+//            System.out.println("nothing is there ! , check again");
+//        }
+
+//
+
+//        try{
+//            int num = Integer.parseInt("anup");
+//            System.out.println(num);
+//        }
+//        catch (NumberFormatException e){
+//            System.out.println("number format given is not right");
+//        }
+
+//        try{
+//            int[] arr = new int[5];
+//            arr[7] = 9;
+//        }
+//        catch (ArrayIndexOutOfBoundsException e){
+//            System.out.println("given array index is not proper");
+//        }
+
+
+        // we can aslo make an nested try block for more bettter operations
+
+        // i can also have one try block and many catch block for it
+
+        // finally block is something that is always executed even after the error
+
+//        try{
+//            int[] arr = new int[5];
+//            arr[7] = 9;
+//        }
+//        finally{
+//            System.out.println("its always executed");
+//        }
+
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// I am going to disuss inheritance in this part :_ super and sub class based
+//
+//class Calc{                                 //super class
+//    public int add(int x , int y){
+//        return(x+y);
+//    }
+//}
+//class AdvCalc extends Calc{               // sub class   ......IS-A
+//
+////    public int add(int x , int y){      // this is override done there if the function has same name and argument
+////        //super.show();           // thsi super also runs the super class to which it extends in parralel
+////        return(x+y+1);
+////    }
+//    public int subt(int x , int y){
+//        return(x-y);
+//    }
+//}
+//
+//class VrAdvCalc extends AdvCalc{                 // sub subclass
+//    public int mult(int x , int y){
+//        return(x*y);
+//    }
+//}
+//public class Main{                                // HAS-A
+//    public static void main(String[] args){
+//
+////        Calc ac = new Calc();
+////        System.out.println(ac.add(6,7));
+//
+////        AdvCalc ac = new AdvCalc();
+////        System.out.println(ac.add(6,7));
+////        System.out.println(ac.subt(7,4));
+//
+//        VrAdvCalc vac = new VrAdvCalc();
+//        System.out.println(vac.add(6,7));
+//        System.out.println(vac.subt(7,4));
+//        System.out.println(vac.mult(5,6));
+//
+//    }
+//
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// Encaptulation Demo is explained here: encap. mins binding the data with the methods
+
+//class Student{
+//    private int rollno;
+//    private String name;
+//
+//    // I will define getters and setters
+//    public void setRollno(int roll){
+//        rollno = roll ;
+//        // it's log file that rovide imformation in encaptulatsion
+//        System.out.println("value of rollno changed");
+//    }
+//    public void getrollno(){
+//        System.out.println("user is accessing the value");
+//        System.out.println(rollno);
+//
+//    }
+//    public void setname(String nam){
+//        name = nam;
+//    }
+//    public void getname(){
+//        System.out.println(name);
+//    }
+//    //error :
+//    // st1.name = 4;
+//}
+//
+//public class Main{
+//    public static void main(String[] args){
+//
+////        Student st1 = new Student();
+////        st1.rollno = 3;
+////        st1.name = "ANUP";
+//
+//        Student st1 = new Student();
+//        st1.setRollno(5);
+//        st1.getrollno();
+//        st1.setname("anup");
+//        st1.getname();
+//
+//    }
+//
+
+
+
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//    //function or method over-loading is discussed there
+//    {
+//        sum(3,4);
+//        //sum(4,5,6);
+//        System.out.println(sum(3,4,5));
+//    }
+//    public static void sum(int x , int y)
+//    {
+//        System.out.println(x+y);
+//    }
+//    public static int sum(int x , int y , int z)
+//    {
+//        //System.out.println(x+y+z);
+//        return (x+y+z);
+//    }
+
+
+//    {
+//        sayhi();
+//        //sayhi("Anup");
+//        System.out.println(sayhi("Anup"));
+//    }
+//    public static void sayhi(){
+//        System.out.println("hi");
+//    }
+//    public static String sayhi(String name){
+//        //System.out.println("hi"+name);
+//        return("hi"+name);
+//    }
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//        int range = 5;
+//        for (int i = 0; i < range; i++) {
+//            System.out.println("hello world "+(i+1));
+//        }
+//
+//        int j = 5;
+//        while(j>0){
+//            System.out.println("hi , i love you "+j);
+//            j--;
+//        }
+//
+//        int k = 5;
+//        do {
+//            System.out.println("hi , i love you "+k);
+//            k--;
+//        } while(k>0);
+//
+//
+
+
+//        Scanner inpt = new Scanner(System.in);
+//        System.out.println("enter the number : ");
+//        int input = inpt.nextInt();
+//
+//        if (input%5 == 0 && input%3!= 0){
+//            System.out.println("Fizz");
+//        }
+//        else if(input%5 != 0 && input%3 == 0) {
+//            System.out.println("Buzz");
+//        }
+//        else if (input%5 == 0 && input%3==0){
+//            System.out.println("FizzBuzz");
+//        }
+//        else{
+//            System.out.println(input);
+//        }
+//
+
+
+
+//        int x=1;
+//        int y =2;
+//        System.out.println(x>y);
+
+
+//        int temp = 2;
+//        if (temp >= 40) {
+//            System.out.println("It's cold day and drink lots of water ");
+//        } else if (temp < 40 && temp>= 20 ) {
+//            System.out.println("It's an beautifyl day");
+//        }
+//        else {
+//            System.out.println("It's cold day");
+//        }
+
+
+//        int temp = 2;
+//        if (temp >= 40) {
+//            System.out.println("It's cold day and drink lots of water ");
+//        } else if (temp < 40 && temp>= 20 )
+//            System.out.println("It's an beautifyl day");
+//        else
+//            System.out.println("It's cold day");
+
+//        int income = 12000;
+//        boolean hasHI;
+//        if (income >= 100000) {
+//            hasHI = true;
+//        }else
+//        hasHI = false;
+//
+//        System.out.println(hasHI);
+
+//        int income = 120000;
+//        boolean hasHI = false;
+//        if (income >= 100000) {
+//            hasHI = true;
+//        }
+
+//        int income = 120000;
+//        boolean hasHI = income >= 100000 ;
+//        System.out.println(hasHI);
+
+//
+//        String Role = "guest";
+//
+//        switch (Role) {
+//            case("admin"):
+//                System.out.println("you are an admin");
+//                break;
+//            case ("moderator"):
+//                System.out.println("you are moderator");
+//                break;
+//            default:
+//                System.out.println("Congo , you are guest");
+//        }
+
+
+
+        // we use ......&& for and ......|| for or....
+
+
+//        Scanner inp = new Scanner(System.in);
+//        System.out.print("age:");
+//        byte agge = inp.nextByte();
+//        System.out.println("your age is :"+agge);
+//
+//        Scanner inpt  = new Scanner(System.in);
+//        System.out.print("name:");
+//        String input = inpt.next();
+//        System.out.println("your age is :"+input);
+//
+
+//
+//        NumberFormat num = NumberFormat.getCurrencyInstance();
+//        String Result = num.format(435454354);
+//        System.out.println(Result);
+//
+//        NumberFormat num1 = NumberFormat.getPercentInstance();
+//        String Result1 = num1.format(0.05);
+//        System.out.println(Result1);
+//
+//        String result = NumberFormat.getPercentInstance().format(0.1);
+//        System.out.println(result);
+
+
+
+
+//        //Implicit casting
+//        // byte>short>int>long>float>double......In this order there is no memory loss done
+
+//        byte vr1 = 3;
+//        int x = vr1+4;
+//        double y = x+5;
+//
+//        System.out.println(y);
+//        System.out.println(x);
+//
+//        // Explicit casting
+//        double  v1 = 5.1;
+//        int y2 = (int)v1 +1;
+//        System.out.println(y2);
+//
+//        String x4="1";
+//        int y4 = Integer.parseInt(x4)+3;
+//        System.out.println(y4);
+//
+//        String x5="1.4";
+//        double y5 = Double.parseDouble(x5)+3;
+//        System.out.println(y5);
+//
+
+
+
+
+//        int var = 10/3;
+//        System.out.println(var);
+//        double vr = (double)10/(double)3;
+//        System.out.println(vr);
+//
+//        int x = 1;
+//        x++;
+//        System.out.println(x);
+//        int y=x;
+//        System.out.println(y);
+//        int y1 = x++;
+//        System.out.println(y1);
+//        int y2 = ++x;
+//        System.out.println(y2);
+//        x+=3;
+//        System.out.println(x);
+
+        // order of per. to all sign is ...().....*..../....+...-.../
+
+
+
+
+
+//        final float pi = 3.14F;
+//        pi = 3;
+//
+//        int[] arr = new int[5];
+//        int[] arra = {434,43,4,34,234,34,3};
+//
+//        arr[0] = 1;
+//        arr[2] = 3;
+//        System.out.println(arr);
+//        System.out.println(Arrays.toString(arr));
+//        System.out.println(Arrays.toString(arra));
+//        System.out.println(arra.length);
+//
+//        Arrays.sort(arra);
+//        System.out.println(Arrays.toString(arra));
+//
+//        int[][] ar = new int[2][2];
+//        int[][] ara = {{2,3,},{3,4}};
+//
+//        ar[0][0] = 5;
+//        ar[0][1] = 6;
+//        System.out.println(Arrays.deepToString(ar));
+//        System.out.println(Arrays.deepToString(ara));
+//
+
+
+
+//        String message = new String("hello world");
+//        String mess = "Hello world"+"??";
+//        String mes = " hello     world   ";
+//
+//        String s1 = "\"mess\"";
+//        String s2 = "\\maam\\";
+//        String s3 = "ma\nma";
+//
+//
+//        System.out.println(message);
+//        System.out.println(mess+"!!");
+//        System.out.println(message.endsWith("d"));
+//        System.out.println(message.length());
+//
+//        System.out.println(message.indexOf("o"));
+//        System.out.println(message.indexOf("p"));
+//        System.out.println(mess.replace("??","##"));
+//        System.out.println(mess);
+//        System.out.println(mess.toUpperCase(Locale.ROOT));
+//        System.out.println(mes.trim()+"try");
+//
+//        System.out.println(s1);
+//        System.out.println(s2);
+//        System.out.println(s3);
+//
+
+
+
+        // primitive vs reference type
+//        int date = 2;
+//        for (int i = 0; i < date; i++) {
+//            System.out.println(date);
+//        }
+//
+//        Date our = new Date();
+//        System.out.println(our);
+//        System.out.println("our");
+
+        // refer. for complex objects and primitive type for simple values
+//
+//        byte x = 1;
+//        byte y = x;
+//        x = 5;
+//        System.out.println(x);
+//        System.out.println(y);
+//
+//        Point point1 = new Point(1 , 3 );
+//        Point point2 = point1;
+//        point1.x = 2;
+//        System.out.println(point1);
+//        System.out.println(point2);
+//
+//
+
+        // ref type are copied by ref. and primitive type are copied by their values .]
+
+
+//        System.out.println("hello world");
+
+//        int age =  44 , temp = 40 ;
+//        byte air = 39;
+//        age = 38;
+//        int herAge = age;
+//        int count = 445_554_543;
+//        long cout = 5_545_334_434L;
+//        float see = 33.43f;
+//        char letter = 'A';
+//        // we can  not use reserved key word to name variable
+//        // we use PascalCase for class naming and camelCase for method or variable naming
+//
+//        System.out.println(age);
+//        System.out.println(temp);
+//        System.out.println(air);
+//        System.out.println(herAge);
+//        System.out.println(count);
+//        System.out.println(cout);
+//        System.out.println(see);
+//        System.out.println(letter);
+
+
+    }
